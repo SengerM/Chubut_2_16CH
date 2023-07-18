@@ -1,0 +1,4 @@
+(fp_lib_table
+  (version 7)
+  (lib (name "chubut")(type "KiCad")(uri "/home/msenger/Desktop/Chubut_2_16CH/libs/chubut.pretty")(options "")(descr ""))
+)

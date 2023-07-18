@@ -1,0 +1,4 @@
+(sym_lib_table
+  (version 7)
+  (lib (name "chubut")(type "KiCad")(uri "${KIPRJMOD}/../../libs/chubut.kicad_sym")(options "")(descr ""))
+)
