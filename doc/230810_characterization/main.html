@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Chubut 2 16ch</title>
+	
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1"> <!-- This fixes the problem of small font (some texts and also the math) in mobile devices, see https://stackoverflow.com/a/35564095/8849755 -->
+	<link rel="stylesheet" href="https://sengerm.github.io/html-academic-publishing/css_and_scripts/style.css">
+	<link rel="stylesheet" href="https://sengerm.github.io/html-academic-publishing/css_and_scripts/images_gallery/images_gallery_with_zoom_211019.css">
+	<link rel="stylesheet" href="css.css">
+	<!-- Math support https://www.mathjax.org/#gettingstarted -->
+    <script>
+	MathJax = {
+	  tex: {
+		inlineMath: [['$', '$'], ['\\(', '\\)']]
+	  },
+	  svg: {
+		fontCache: 'global'
+	  }
+	};
+	</script>
+	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+	
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+	
+</head>
+
+<body style="max-width: 888px;">
+
+<div id="document_title"></div>
+
+<author affiliation="Universität Zürich">Matías Senger</author>
+
+<div style="margin: 22px; text-align: center;">August 2023</div>
+
+<siglas class="definition" first="________" short="___"></siglas>
+<siglas class="definition" first="Minimum Ionizing Particle (MIP)" short="MIP"></siglas>
+<siglas class="definition" first="Trench Isolated LGAD (TI-LGAD)" short="TI-LGAD"></siglas>
+<siglas class="definition" first="Micro Channel Plate Photon Multiplying Tube (MCP-PMT)" short="MCP-PMT"></siglas>
+<siglas class="definition" first="Device Under Test (DUT)" short="DUT"></siglas>
+<siglas class="definition" first="Log Gain Avalanche Detector (LGAD)" short="LGAD"></siglas>
+
+<abstract><p>This document presents the <em>Chubut&nbsp;2&nbsp;16ch</em> board, which is a version of the <a href="https://github.com/SengerM/Chubut_2">Chubut&nbsp;2 board</a> but with 16&nbsp;channels instead of&nbsp;4. The board is introduced, as well as a characterization using a radioactive beta source.</p></abstract>
+
+<div id="table-of-contents">
+	<h2 class="unnumbered">Contents</h2>
+</div>
+
+<h1>Introduction</h1>
+
+<p>The <em>Chubut&nbsp;2&nbsp;16ch</em> readout board is a readout board designed for testing <siglas>LGAD</siglas> devices. It has 16 independent channels with built in amplification for each channel. The circuitry for each channel is replicated from <em>the original Chubut&nbsp;2</em>&nbsp;<crossref toid="Reference: Chubut 2 repo"></crossref>. Each channel has 2 amplification stages, making it possible to measure <siglas>LGAD</siglas>s without the need for external amplifiers. A scheme of the board is shown in <crossref toid="Figure: board scheme"></crossref>. It consists of two boards, one is the <em>main board</em> which contains the electronics, shown in the left of <crossrfe toid="Figure: board scheme"></crossrfe>, and the other is the <em>carrier board</em> which only hosts the <siglas>DUT</siglas>, shown in the right of <crossref toid="Figure: board scheme"></crossref>. The advantage of this design with a main and a carrier board is that the main board can be utilized multiple times to measure different <siglas>DUT</siglas>s, reducing monetary cost and work load. The carrier board fits only in one position, so it is not possible to install it wrong, and is held in place using screws. This can be seen in the pictures sown in <crossref toid="Figure: pictures of the board"></crossref>.</p>
+
+<float class="Figure" id="Figure: board scheme">
+	<div class="float_content">
+		<img style="max-width: 100%;" src="media/PCB_scheme.svg">
+	</div>
+	<floatcaption>Schematic diagram of the Chubut&nbsp;2&nbsp;16ch readout board.</floatcaption>
+</float>
+
+<float class="Figure" id="Figure: pictures of the board">
+	<div class="images_gallery_with_zoom_211019">
+		<img style="max-width: 100%;" src="media/pics/photo_2023-08-13_12-18-38.jpg">
+		<img style="max-width: 100%;" src="media/pics/photo_2023-08-13_12-18-40.jpg">
+	</div>
+	<floatcaption>Pictures of the Chubut&nbsp;2&nbsp;16ch readout board.</floatcaption>
+</float>
+
+<p>In the following sections, more details of the board are presented.</p>
+
+<h1>Characterization with beta source</h1>
+
+<p>To characterize the readout board, a <siglas>TI-LGAD</siglas> was mounted and exposed to radiation from a <sup>90</sup>Sr beta source. In <crossref toid="Figure: beta source diagram"></crossref> a schematic representation of the measuring setup is shown. The <siglas>TI-LGAD</siglas> used is from the RD50 FBK production, wafer&nbsp;16, 2&nbsp;trenches, pixel border&nbsp;V2 and contact type ring. This device has a 4×4 layout with a pitch of 250&nbsp;µm. The 16 pixels from the <siglas>DUT</siglas> were connected to each output of the readout board. The measurement was performed at +20&nbsp;℃, because the board is intended to be used in the test beam setup, probably at room temperature. The signals from the outputs of the readout board, as well as the trigger signal from the <siglas>MCP-PMT</siglas>, were digitized using a CAEN&nbsp;DT5742 digitizer, as shown in the diagram.</p>
+
+<float class="Figure" id="Figure: beta source diagram">
+	<img style="width: 100%; max-width: 777px;" src="media/beta_source_scheme.svg">
+	<floatcaption>Diagram of the arrangement and connections for the beta source testing.</floatcaption>
+</float>
+
+<p>The first check was to verify the integrity of the digitized waveforms. In <crossref toid="Figure: waveforms example"></crossref> example waveforms from a random event are shown. The first plot shows the raw data as provided by the digitizer. We see that channel 2 (<em>signal_name</em> DUT_2) has a negative peak, consistent with the expected polarity given the type of <siglas>DUT</siglas>, and the two channels called <em>MCP_PMT_1</em> and <em>MCP_PMT_2</em> have a positive peak, consistent with the expected polarity for the <siglas>MCP-PMT</siglas> followed by an inverting amplifying stage. The reason there are two waveforms corresponding to the <siglas>MCP-PMT</siglas> is due to technical details regarding the implementation of the digitizer; the 16 channels are split in two groups of 8 channels each, and each of these groups has an independent trigger signal which comes from an internal splitting of the <em>TR0</em> input&nbsp;<crossref toid="Reference: CAEN digitizer manual"></crossref>. For the channel 2 (<em>DUT_2</em>), which is the one that was hit by the beta particle in this example event, the corresponding <em>MCP_PMT_1</em> is the correct trigger signal to use when calculating time quantities. In the same figure (<crossref toid="Figure: waveforms example"></crossref>, scroll to the right), two additional plots are shown with details of how each of the two relevant waveforms from this example are processed by the analysis algorithms. By zooming in, it can be seen that the analysis software performs a linear interpolation of the waveforms.</p>
+
+<float class="Figure" id="Figure: waveforms example">
+	<div class="float_content">
+		<iframe class="plotly" src="media/waveforms_n_trigger_61056.html"></iframe>
+		<iframe class="plotly" src="media/n_trigger 61056 signal_name DUT_2.html"></iframe>
+		<iframe class="plotly" src="media/n_trigger 61056 signal_name MCP_PMT_1.html"></iframe>
+	</div>
+	<floatcaption>Waveforms from a particular event, as an example. In the first plot, the raw data from the digitizer is shown. The second and third plot (scroll horizontally) show how the relevant waveforms from the <siglas>DUT</siglas> and the <siglas>MCP-PMT</siglas> were processed.</floatcaption>
+</float>
+
+<p>Similar waveforms as the ones shown in <crossref toid="Figure: waveforms example"></crossref> are observed for all the channels. To get a first impression of how things work, it is useful to produce for all the individual waveforms a scatter plot in which the <em>x</em> axis is the time of the peak as measured from the trigger and the <em>y</em> axis is the amplitude of the signal. Such plot is shown in <crossref toid="Figure: amplitude vs t_50 scatter plot"></crossref> for a subset of the events<footnote>The reason for showing only a random subset of events is because otherwise the number of points in the plot is overwhelming and it becomes too heavy to load.</footnote>, without applying any filter. The <em>x</em> axis shows the quantity <em>t_50 - t_50_trigger</em> which is a measure of the peak time with respect to the trigger time. The quantity <em>t_50</em> is the time at which the peak goes over its 50&nbsp;%, as shown in the two right plots of <crossref toid="Figure: waveforms example"></crossref>, while <em>t_50_trigger</em> is the same quantity but for the corresponding <em>MCP_PMT_1</em> or <em>MCP_PMT_2</em> depending on the <em>trigger group</em> at which the channel belongs to, as described previously. In this figure we see that the majority of events distribute randomly in time and with amplitudes of approximately ±2&nbsp;mV (zoom in vertically to see), which corresponds to waveforms without signal from a beta particle. There is another component in this distribution for which the time (<em>x</em> axis) is well localized, between ±1&nbsp;ns (zoom in horizontally to see better) and negative amplitudes ranging from -40&nbsp;mV and larger. These points represent the signals in each pixel of the <siglas>DUT</siglas>. The points corresponding to the two signals of the <siglas>MCP-PMT</siglas> are all perfectly aligned at <em>t</em>=0, the reason is that these signals are themselves the triggers, so the time with respect to the trigger is, by definition,&nbsp;0.</p>
+
+<float class="Figure" id="Figure: amplitude vs t_50 scatter plot">
+	<div class="float_content">
+		<iframe class="plotly" src="media/scatter_plot t_50 - t_50_trigger (s) Amplitude (V).html"></iframe>
+	</div>
+	<floatcaption>Scatter plot of waveform amplitude vs <em>time from trigger</em> defined as the time from the waveform crossing the 50&nbsp;% and the trigger crossing the 50&nbsp;%.</floatcaption>
+</float>
+
+<p>To proceed further with the analysis, a threshold in the amplitude is imposed to all the <siglas>DUT</siglas> signals to select only those events in which the channels have an amplitude of 40&nbsp;mV or larger in absolute value. In this way, all the empty waveforms are removed. <crossref toid="Figure: amplitude distribution after cuts and langauss fits"></crossref> shows the distribution of amplitudes after performing the selection of events. The plot on the left shows the empirical cumulative distribution function (ECDF) and the plot on the right (scroll horizontally) shows a histogram and a langauss fit (Landau convoluted with Gaussian) to each channel. In this last plot, the traces can be enabled for the channels not shown by clicking on the elements in the legend, only channels 1 and 2 are shown by default for the sake of clarity.</p>
+
+<float class="Figure" id="Figure: amplitude distribution after cuts and langauss fits">
+	<div class="float_content">
+		<iframe class="plotly" src="media/-Amplitude (V).html"></iframe>
+		<iframe class="plotly" style="min-width: 777px !important;" src="media/variable_-Amplitude (V)_log.html"></iframe>
+	</div>
+	<floatcaption>Amplitude distribution after selecting those waveforms with an amplitude larger than 40&nbsp;mV in absolute value. In these plots, the quantity shown is the amplitude multiplied by -1 to make it positive. The first plot shows the empirical cumulative distribution function (ECDF) and the second plot shows the histograms together with a langauss fit (Landau convoluted with a Gaussian). To enable/disable traces, click on the elements in the legend.</floatcaption>
+</float>
+
+<p>In <crossref toid="Figure: other distributions after cuts"></crossref> the distribution for other parameters, after applying the cuts in the amplitude, are shown (scroll horizontally if needed to see all of them). As seen, the signal to noise ratio has a median that oscillates between 120 and 135, for the rise time the median oscillates between 980 and 1010&nbsp;ps, the median noise is between 610 and 660&nbsp;µV, the median pulse duration above 50&nbsp;% threshold is between 1.42 and 1.48&nbsp;ns and the integral under the peak, called <em>Collected charge (V s)</em> in the plot, has a median between 115 and 138&nbsp;×10<sup>-12</sup>&nbsp;V&nbsp;s. All these quantities are calculated individually for each waveform as shown in the two example plots to the right in <crossref toid="Figure: waveforms example"></crossref>. From all these distributions, and the ones shown in <crossref toid="Figure: amplitude distribution after cuts and langauss fits"></crossref>, it can be concluded that the system is performing properly and the response of each channel is uniform.</p>
+
+<float class="Figure" id="Figure: other distributions after cuts">
+	<div class="float_content">
+		<iframe class="plotly" src="media/distributions/SNR.html"></iframe>
+		<iframe class="plotly" src="media/distributions/Rise time (s).html"></iframe>
+		<iframe class="plotly" src="media/distributions/Noise (V).html"></iframe>
+		<iframe class="plotly" src="media/distributions/Time over 50% (s).html"></iframe>
+		<iframe class="plotly" src="media/distributions/-Collected charge (V s).html"></iframe>
+	</div>
+	<floatcaption>Other distributions obtained in the same conditions as for the ones shown in <crossref toid="Figure: amplitude distribution after cuts and langauss fits"></crossref>, i.e. after selecting the events by amplitude. The quantities shown in these plots correspond to the parameters shown in the analyzed waveforms to the right in <crossref toid="Figure: waveforms example"></crossref>. Scroll horizontally to see all of them.</floatcaption>
+</float>
+
+<p>Among the most important parameters to be determined using the readout board is the time resolution of the <siglas>DUT</siglas>. To calculate the time resolution, or, firstly, the <em>jitter</em><footnote>Here, jitter is understood as the fluctuations in the time at which a signal crosses some threshold, see <a href="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Jitter_timing.svg/660px-Jitter_timing.svg.png">this image</a> taken from <a href="https://de.wikipedia.org/wiki/Jitter">the Wikipeida article on jitter</a>.</footnote>, the time information from each peak is extracted. This information conists on a set of 9 parameters extracted from each peak, labeled <em>t_10</em>, <em>t_20</em>, ..., <em>t_90</em> that measure the time at which the peak went above the corresponding percentage of its own amplitude, i.e. applying a constant fraction discrimination, as shown in the two plots on the right in <crossref toid="Figure: waveforms example"></crossref>. Having these values, then it is possible to select any pair of signals, say <em>DUT_1</em> and <em>MCP_PMT_1</em>, and calculate the time difference for some pair of <em>k<sub>CFD</sub></em> values, say 20&nbsp;% and 20&nbsp;%. This means to compute <em>Δt = t_20<sub>DUT_1</sub> - t_20<sub>MCP_PMT_1</sub></em> for each event. An example is shown in <crossref toid="Figure: Delta t distribution example"></crossref>. The fluctuations observed in <em>Δt</em> correspond to the jitter for this particular choice of signals and thresholds, i.e. the fluctuation in the time for which one of the signals crosses some threshold, regarding the other as the time reference.</p>
+
+<float class="Figure" id="Figure: Delta t distribution example">
+	<div class="float_content">
+		<iframe class="plotly" src="media/Delta_t distribution and fit where jitter was obtained from.html"></iframe>
+	</div>
+	<floatcaption>Example of Δt distribution for <em>k<sub>CFD, DUT_4</sub>=40&nbsp;%</em> and <em>k<sub>CFD, MCP_PMT_1</sub>=50&nbsp;%</em>, together with a Gaussan fit.</floatcaption>
+</float>
+
+<p>The pairs of signals for which the jitter is relevant are each of the <siglas>DUT</siglas> channels and the corresponding trigger signal according to the trigger group, as detailed previously, which is coming from the <siglas>MCP-PMT</siglas> time reference. The values for the <em>k<sub>CFD</sub></em> thresholds have to be chosen according to some criterion. Two common choices are either to fix them at 20&nbsp;% or to keep them free and choose those which minimize the jitter. In <crossref toid="Figure: jitter comparisons"></crossref> the jitter for each channel is shown; the plot in the left has <em>k<sub>CFD</sub></em> optimized while the plot in the right has <em>k<sub>CFD</sub></em> fixed at 50&nbsp;% for each signal. It can be seen that the results are more uniform for the optimal case, yielding an average value of ~42&nbsp;ps of jitter while for the right plot with <em>k<sub>CFD</sub></em> fixed we obtain an average value of ~48&nbsp;ps.</p>
+
+<float class="Figure" id="Figure: jitter comparisons">
+	<div class="float_content">
+		<iframe class="plotly" src="media/jitter_comparison/Jitter_comparison_best_best.html"></iframe>
+		<iframe class="plotly" src="media/jitter_comparison/Jitter_comparison_50_50.html"></iframe>
+	</div>
+	<floatcaption>Jitter obtained for each readout channel and the corresponding <em>MCP_PMT_x</em> signal. The plot on the left shows the reuslt when the <em>k<sub>CFD</sub></em> is chosen to obtain the optimal result, the plot on the right (scroll horizontally if needed) shows the result when the <em>k<sub>CFD</sub></em> is kept fixed at 50&nbsp;% for each signal.</floatcaption>
+</float>
+
+<p>To ultimately obtain the time resolution of the <siglas>DUT</siglas> from the data shown in <crossref toid="Figure: jitter comparisons"></crossref>, the contribution from the <siglas>MCP-PMT</siglas> has to be subtracted in quadrature to the jitter. This requires a prior calibration of the <siglas>MCP-PMT</siglas>, together with the amplifier that is being used, the digitizer, as well as the particular trigger threshold and <em>k<sub>CFD</sub></em> value. This exercise was not performed so the right value is unknown, but it is expected to be in the range between 15-25&nbsp;ps&nbsp;<crossref toid="Reference: Determining the time resolution of the Photonis MCP-PMT with betas"></crossref>. However, the jitter values obtained in <crossref toid="Figure: jitter comparisons"></crossref> are compatible with values obtained in the past using similar <siglas>DUT</siglas>s but different readout boards (Santa Cruz board) and different digitizers (LeCroy 4&nbsp;GHz, 40&nbsp;GS/s oscilloscope)&nbsp;<crossref toid="Reference: Effect of bandwidth in time resolution CAEN digitizer vs LeCroy oscilloscope"></crossref> which oscillate between 35 and 40&nbsp;ps. It has to be taken into account that these values were obtained measuring at -20&nbsp;℃, while the current study was performed at +20&nbsp;℃. Considering a contribution from the <siglas>MCP-PMT</siglas> signal of 20&nbsp;ps, then the time resolution for each channel oscillates between 37 and 43.5&nbsp;ps, which is reasonable and expected.</p>
+
+<h1>Conclusions</h1>
+
+<p>A new readout board for pixelated <siglas>LGAD</siglas>s was designed, implemented and tested in laboratory conditions. The board has 16 readout channels, each with two amplification stages thus eliminating the need for external amplifiers. The design includes the splitting of the readout board into a <em>main board</em> and a <em>carrier board</em> which makes it very convenient to test multiple devices and reducing both monetary and work-load costs.</p>
+
+<p>The characterization with beta source shows that the response of all the 16 channels of the board is uniform and performs as needed to make time resolution studies. The board is also compatible with the <em>CAEN DT5742</em> digitizer.</p>
+
+<div id="references_list">
+	<h1 class="unnumbered">References</h1>
+	<reference id="Reference: CAEN digitizer manual">CAEN DT5742 user manual. <a href="https://www.caen.it/products/dt5742/">https://www.caen.it/products/dt5742/</a>.</reference>
+	
+	<reference id="Reference: Determining the time resolution of the Photonis MCP-PMT with betas">Determining the time resolution of the Photonis MCP-PMT with betas. <a href="https://sengerm.github.io/html-github-hosting/220126_Photonis_PMT_time_resolution/index.html">https://sengerm.github.io/html-github-hosting/220126_Photonis_PMT_time_resolution/index.html</a>.</reference>
+	
+	<reference id="Reference: Effect of bandwidth in time resolution CAEN digitizer vs LeCroy oscilloscope">Effect of bandwidth in time resolution CAEN digitizer vs LeCroy oscilloscope, presented in <em>AIDAInnova WP6 Test beam preparation #3</em>. <a href="https://indico.cern.ch/event/1279942/contributions/5378119/attachments/2648690/4585355/bandwidth_studies.pdf" style="word-break: break-word;">https://indico.cern.ch/event/1279942/contributions/5378119/attachments/2648690/4585355/bandwidth_studies.pdf</a>.</reference>
+	
+	<reference id="Reference: Chubut 2 repo">Chubut 2 repository. <a href="https://github.com/SengerM/Chubut_2">https://github.com/SengerM/Chubut_2</a>.</reference>
+</div>
+
+<div id="footnotes_list">
+	<h1 class="unnumbered">Footnotes</h2>
+</div>
+
+<script src="https://sengerm.github.io/html-academic-publishing/css_and_scripts/script.js"></script>
+<script src="https://sengerm.github.io/html-academic-publishing/css_and_scripts/authors.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,7 @@
+div.float_content {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	overflow: auto;
+	width: 90vw;
+}
