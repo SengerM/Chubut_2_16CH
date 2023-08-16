@@ -55,9 +55,7 @@
 <p>The <em>Chubut&nbsp;2&nbsp;16ch</em> readout board is a readout board designed for testing <siglas>LGAD</siglas> devices. It has 16 independent channels with built in amplification for each channel. The circuitry for each channel is replicated from <em>the original Chubut&nbsp;2</em>&nbsp;<crossref toid="Reference: Chubut 2 repo"></crossref>. Each channel has 2 amplification stages, making it possible to measure <siglas>LGAD</siglas>s without the need for external amplifiers. A scheme of the board is shown in <crossref toid="Figure: board scheme"></crossref>. It consists of two boards, one is the <em>main board</em> which contains the electronics, shown in the left of <crossrfe toid="Figure: board scheme"></crossrfe>, and the other is the <em>carrier board</em> which only hosts the <siglas>DUT</siglas>, shown in the right of <crossref toid="Figure: board scheme"></crossref>. The advantage of this design with a main and a carrier board is that the main board can be utilized multiple times to measure different <siglas>DUT</siglas>s, reducing monetary cost and work load. The carrier board fits only in one position, so it is not possible to install it wrong, and is held in place using screws. This can be seen in the pictures sown in <crossref toid="Figure: pictures of the board"></crossref>.</p>
 
 <float class="Figure" id="Figure: board scheme">
-	<div class="float_content">
-		<img style="max-width: 100%;" src="media/PCB_scheme.svg">
-	</div>
+	<img style="max-width: 100%;" src="media/PCB_scheme.svg">
 	<floatcaption>Schematic diagram of the Chubut&nbsp;2&nbsp;16ch readout board.</floatcaption>
 </float>
 
@@ -65,11 +63,26 @@
 	<div class="images_gallery_with_zoom_211019">
 		<img style="max-width: 100%;" src="media/pics/photo_2023-08-13_12-18-38.jpg">
 		<img style="max-width: 100%;" src="media/pics/photo_2023-08-13_12-18-40.jpg">
+		<img style="max-width: 100%;" src="media/pics/photo_2023-08-16_14-18-54.jpg">
+		<img style="max-width: 100%;" src="media/pics/photo_2023-08-16_14-18-55.jpg">
 	</div>
 	<floatcaption>Pictures of the Chubut&nbsp;2&nbsp;16ch readout board.</floatcaption>
 </float>
 
 <p>In the following sections, more details of the board are presented.</p>
+
+<h1>Temperature raise</h1>
+
+<p>Due to the Chubut&nbsp;2&nbsp;16ch readout board having 16 channels, each with two amplification stages, a considerable amount of power is dissipated. When operated at 3&nbsp;V the total current drained is 700-800&nbsp;mA, which means a total power of 2-2.5&nbsp;W. Close to the area where the amplifiers are located, there is power dissipation and thus the temperature increases. In order to examine how much the temperature increases, pictures with a thermal camera were taken. These pictures are shown in <crossref toid="Figure: infrared photos"></crossref>. When these pictures were taken, the board was installed in our TCT&nbsp;setup. The ambient temperature, as seen in the photos, was 20&nbsp;℃. The area close to the amplifiers was approximately 12.5&nbsp;℃ higher, while the carrier board where the <siglas>DUT</siglas> was mounted is approximately at 27&nbsp;℃, i.e. 5&nbsp;℃ higher than ambient temperature.</p>
+
+<float class="Figure" id="Figure: infrared photos">
+	<div class="images_gallery_with_zoom_211019">
+		<img src="media/IR/IR_2187.jpg">
+		<img src="media/IR/IR_2188.jpg">
+		<img src="media/IR/IR_2190.jpg">
+	</div>
+	<floatcaption>Photographs of the Chubut&nbsp;2&nbsp;16ch readout board during operation taken with a thermal camera.</floatcaption>
+</float>
 
 <h1>Characterization with beta source</h1>
 
